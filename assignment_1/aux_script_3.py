@@ -86,9 +86,9 @@ def undistort_and_get_roi(mtx, dist, fname):
     paper_points = cv2.findNonZero(closing)
     y, x, h, w = cv2.boundingRect(paper_points)
 
-    # Add a 15px margin in each side to get a definive ROI 
+    # Add a 15px margin in each side to get a definive ROI
     epsilon = 15
-    corr = corr[x + epsilon : x+w-epsilon, y+epsilon:y+h-epsilon]
+    corr = corr[x + epsilon : x + w - epsilon, y + epsilon : y + h - epsilon]
     cv2.imshow("roi", corr)
 
     cv2.waitKey(500000)
@@ -191,9 +191,7 @@ if __name__ == "__main__":
     D = np.asarray([[-0.344, 0.09, 0.0, 0.0, -0.003]])
 
     # Question c)
-    undistort_and_get_roi(
-        K, D, "./WhiteBackground/calib_img 3.png"
-    )
+    undistort_and_get_roi(K, D, "./WhiteBackground/calib_img 3.png")
 
     # get_number_of_peanuts(K, D)
 

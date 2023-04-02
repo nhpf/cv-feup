@@ -47,7 +47,7 @@ def calibrate(is_extrinsic, square_size_mm=22, width=7, height=4):
 
             # This function draws the chessboard corners - used only for debugging
             img = cv2.drawChessboardCorners(img, (width, height), corners2, ret)
-            cv2.imshow('img', img)
+            cv2.imshow("img", img)
             cv2.waitKey(6000)
 
     # Use the function calibrateCamera to generate correction matrix

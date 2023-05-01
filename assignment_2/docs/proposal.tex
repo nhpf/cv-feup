@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=10.0mm, right=10.0mm, top=25mm, bottom=25mm,footskip=20pt]{geometry}
+
+\usepackage[utf8]{inputenc}
+
+% Fonts
+%---------------------------------------------------------
+\usepackage{fontspec}
+\usepackage{indentfirst}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\pagenumbering{gobble}
+
+\usepackage{titling}
+\setlength{\droptitle}{-3em}
+\title{
+\textbf{Multiple Vessel Detection and Tracking in Harsh Maritime Environments}
+}
+\author{
+    Hopf, Nicholas\\
+    % \textit{Faculty of Engineering}\\\textit{University of Porto}\\
+    up200000000
+    \and
+    Gomes, Rodrigo\\
+    % \textit{Faculty of Engineering}\\\textit{University of Porto}\\
+    up200000000
+    \and
+    Colaço, Rui\\
+    % \textit{Faculty of Engineering}\\\textit{University of Porto}\\
+    up200000000
+}
+\date{\vspace{-3ex}}
+% \date{}
+
+% Fancy header
+\usepackage{fancyhdr}
+
+\fancypagestyle{plain}{\pagestyle{fancy}}
+\fancyhf{}
+\fancyhead[R]{Project proposal - Computer Vision}
+\fancyhead[L]{April 2023}
+% \fancyfoot[L]{}
+% \fancyfoot[R]{Página \thepage}
+%---------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+\section{Motivation}
+
+This project will be based upon the work developed on paper \textit{Multiple Vessel Detection and Tracking in Harsh Maritime Environment} (Duarte D, Pereira M and Pinto A, 2023) as suggested by professors Andry Pinto and Daniel Campos as an introduction to the current computer vision research initiatives ongoing at FEUP and INESC TEC.
+\\\par
+The aforementioned paper will serve as the main guide to strategies and results that can be achieved regarding this project's scope, as well as a source of references that may support this project's development.
+
+\section{Objectives}
+As research concerning navigation of Autonomous Surface Vehicles (ASVs) increases, improvement in collision avoidance methods is critical. Especially in the maritime environment, where obstacles and the ASV may both be moving, a reliable tracking of surrounding vessels and motion prediction become even more relevant.
+\\\par
+Therefore, this project aims to detect and track vessels neighboring a reference camera that may be attached to an ASV. This context is especially relevant since real-time monitoring and adjustment of lighting and focus will not be performed, demanding robustness from the algorithms even with harsh environmental conditions.
+
+\section{Problem statement}
+Given that this project aims to develop a tracking model, transfer learning techniques will be used (based on YOLO-v4) to ensure object detection, while motion tracking will be implemented with the DeepSORT algorithm. The PyTorch framework will be used to all tasks regarding neural network training.
+
+\section{Datasets}
+The datasets that will be used within the scope of this project are:
+\begin{itemize}
+    \item the \href{https://sites.google.com/site/dilipprasad/home/singapore-maritime-dataset}{Singapore Maritime Dataset}, whose videos will be used to train and evaluate the object tracking tests. The videos are accompanied by matrix files of the bounding boxes of every object on frame.
+    \item the \href{https://github.com/avaapm/marveldataset2016}{MARVEL Dataset}, that contains the images which will be used to train the classifier in the tracking module. It has 100k images of different vessels distributed over 38 classes.
+\end{itemize}
+
+\end{document}

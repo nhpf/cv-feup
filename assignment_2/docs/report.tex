@@ -1,0 +1,88 @@
+% Document layout
+\documentclass[a4paper,12pt,oneside,twocolumn]{article}
+\usepackage[left=15mm, right=15mm, top=25mm, bottom=20mm]{geometry}
+
+% \usepackage[utf8]{inputenc} % XeLaTeX doesn't need it!
+
+% Bibliography
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+% Font
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% Indentation
+% \setlength\parindent{0pt}
+% \usepackage{indentfirst}
+
+% Color links
+% \usepackage[colorlinks,allcolors=blue]{hyperref}
+
+% Title
+\usepackage{titling}
+\setlength{\droptitle}{-3em}
+\title{
+\textbf{Multiple Vessel Detection and Tracking in Harsh Maritime Environments}
+}
+\author{
+    Nicholas Hopf\\
+    %\small\textit{Faculty of Engineering}\\\small\textit{University of Porto}\\
+    up200000000
+    \and
+    Rodrigo Gomes\\
+    %\small\textit{Faculty of Engineering}\\\small\textit{University of Porto}\\
+    up200000000
+    \and
+    Rui Colaço\\
+    %\small\textit{Faculty of Engineering}\\\small\textit{University of Porto}\\
+    up200000000
+}
+\date{\vspace{-3ex}}
+
+% Fancy header
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{\pagestyle{fancy}}
+\fancyhf{}
+\fancyhead[R]{Computer Vision Project Report}
+\fancyhead[L]{May 2023}
+% \fancyfoot[L]{\textit{Faculty of Engineering - University of Porto}}
+\fancyfoot[R]{Page \thepage}
+
+%---------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+\section{Methodology}\label{sec:methodology}
+Our objective was to replicate and expand the work done in the original paper~\cite{MVDTHME}.
+
+\hfill\newline
+Write the stuff mentioned in the proposal\ldots % TODO
+\hfill\newline
+
+Given a new video, our model should properly track and classify each maritime vehicle in frame.
+
+To achieve such result, the process is:
+\begin{enumerate}
+    \item \textbf{get frames} from the input video
+    \item \textbf{detect} boats from each frame with YOLO, computing their classes and bounding boxes
+    \item \textbf{track} boats with DeepSORT~\cite{DEEPSORT} given a list of bounding boxes and their classes
+\end{enumerate}
+
+The Mean Average Precision (mAP) was the metric chosen for measuring the accuracy of the model.
+
+To train the model we obtained one image for every N seconds in each video from the Singapore Maritime Dataset~\cite{SINGAPORE}
+
+Beyond the common augmentation techniques already included in the YOLO training process, we also applied histogram correction and sharpening to augment the data and minimize exposure issues that are sometimes present in the images.
+We used the Extended MARVEL Dataset~\cite{MARVEL} to train the classifier in the tracking model.
+
+As demonstrated in the original paper~\cite{MVDTHME}, choosing the Adadelta optimizer yielded the best results.
+
+% mAP50 is the mean Average Precision at a 50\% IoU (Intersection over Union) threshold.
+
+\section{References}\label{sec:references}
+\printbibliography
+
+\end{document}

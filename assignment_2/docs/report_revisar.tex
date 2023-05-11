@@ -121,8 +121,6 @@ To achieve such result, the process is:
     \item \textbf{track} boats with DeepSORT~\cite{DEEPSORT} given a list of bounding boxes and their classes
 \end{enumerate}
 
-The Mean Average Precision (mAP) was the metric chosen for measuring the accuracy of the model.
-
 To train the model we obtained one image for every N seconds in each video from the Singapore Maritime Dataset~\cite{SINGAPORE}
 
 Beyond the common augmentation techniques already included in the YOLO training process, we also applied histogram correction and sharpening to augment the data and minimize exposure issues that are sometimes present in the images.

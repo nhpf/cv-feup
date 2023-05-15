@@ -9,20 +9,25 @@ pip install -r requirements.txt
 
 Learn more about PyTorch configuration [here](https://pytorch.org/get-started/locally/).
 
-# References
+## Context
+This project uses YOLOv8 and DeepSORT to perform "Multiple Vessel Detection and Tracking in Harsh Maritime Environments".
+It aims to recreate the results of a paper released this year by researches at INESC TEC.
+You can learn more about the project and our achievements by reading the final report as described below.
 
-## Input video frames
-Capture frames:
- - [Project that uses the same dataset](https://github.com/tilemmpon/Singapore-Maritime-Dataset-Frames-Ground-Truth-Generation-and-Statistics)
+## File structure
 
-## Detection
-YOLO:
- - [YOLOv4 paper](https://arxiv.org/pdf/2004.10934.pdf)
- - [YOLOv4 GitHub](https://github.com/AlexeyAB/darknet)
- - [YOLOv7 GitHub](https://github.com/WongKinYiu/yolov7)
+### `docs/`
+ - Base paper, project proposal, references and final report
+ - You should compile the `report.tex` with XeLaTeX
 
-Transfer learning:
- - [Pytorch quickstart](https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html)
+### `examples/`
+ - Small scripts that work as minimal working examples of each relevant process present in the project
+ - Visualize the labeled dataset, perform detection with YOLOv8, try different methods of data augmentation, etc.
 
-## Multi-object Tracking
-DeepSORT:
+### `tasks/`
+ - Each script in this directory contains the isolated implementation of the major steps performed in the final Jupyter notebook
+ - The order of execution is given by the number preceding each script, i.e. the first script is `1_process_singapore.py`
+
+### `main.py`
+ - Entry point for the project before the notebook is ready
+ - It has useful comments that will aid us during the project development

@@ -1,0 +1,5 @@
+path:  "/externo/cv_data/singapore"
+train: "train"
+val: "validation"
+nc: 1
+names: ['boat']

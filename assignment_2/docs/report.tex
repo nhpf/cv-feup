@@ -16,22 +16,25 @@
 % \setlength\parindent{0pt}
 % \usepackage{indentfirst}
 
-%Hyperlinks, Graphs and formatting
+% Hyperlinks, Images and formatting
 \usepackage[colorlinks,allcolors=black]{hyperref}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{multicol}
 \setlength{\columnsep}{1cm}
 
-% Color links
-% \usepackage[colorlinks,allcolors=blue]{hyperref}
+% Section titling
+\usepackage{titlesec}
+%\titleformat{\section}[block]{\normalsize\textsc\filcenter}{}{0pt}{}
+%\titleformat{\subsection}[block]{\normalsize\textsc\filcenter}{}{0pt}{}
+\titleformat{\section}{\normalsize\scshape\filcenter}{\textnormal{\Roman{section}.}}{1em}{}
+
+% \renewcommand{\thesection}{\Roman{section}}
 
 % Title
 \usepackage{titling}
 \setlength{\droptitle}{-3em}
-\title{
-\textbf{Multiple Vessel Detection and Tracking in Harsh Maritime Environments}
-}
+\title{Multiple Vessel Detection and Tracking in Harsh\\Maritime Environments}
 \author{
     Nicholas Hopf\\
     %\small\textit{Faculty of Engineering}\\\small\textit{University of Porto}\\
@@ -197,12 +200,12 @@ The use of the MARVEL extended dataset for training instead of the MARVEL micro,
 
 \section{Opportunities}\label{sec:opportunities}
 % TODO: revisar
-Some cases of anchor overlapping were identified in the implementation described above.
+Some cases of anchor overlapping (object occlusion) were identified in the implementation described above, so multiple vehicles were being labeled as a single boat.
 It is possible to perform ``Non-Maximum Suppression'' or change the applied method, resorting to an anchor-free tracking approach.
 In March 2023 Yantong \textit{et al.}~\cite{FAIRMOT} obtained successful tracking results with the Singapore Maritime Dataset while working with FairMOT and Deep Layer Aggregation (DLA) instead of DeepSORT and YOLO\@.
 Another option for exploration would be resorting to the recently published StrongSORT~\cite{STRONGSORT} tracker.
 
 \section{References}\label{sec:references}
-\printbibliography
+\printbibliography[heading=none]
 \end{multicols}
 \end{document}

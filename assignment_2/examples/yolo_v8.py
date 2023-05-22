@@ -4,7 +4,7 @@ from scipy.io import loadmat
 from ultralytics import YOLO
 
 # Load medium model - later we will perform transfer learning
-yolo_detection = YOLO(model='yolov8m.pt')
+yolo_detection = YOLO(model="yolov8m.pt")
 
 # Load trained model
 # yolo_detection = YOLO(model='/home/nick/repos/cv-feup/runs/detect/train5/weights/best.pt')
@@ -14,7 +14,7 @@ video_dir = "/externo/cv_data/VIS_Onshore/Videos/"
 matrix_dir = "/externo/cv_data/VIS_Onshore/ObjectGT/"
 video_ref = "MVI_1474_VIS"
 
-output_dir = os.path.join(os.path.dirname(__file__), 'detection_results')
+output_dir = os.path.join(os.path.dirname(__file__), "detection_results")
 
 if not os.path.isdir(output_dir):
     os.mkdir(output_dir)
@@ -23,7 +23,7 @@ matrix = matrix_dir + f"{video_ref}_ObjectGT.mat"
 mtx = loadmat(matrix)
 
 # Create a video capture object, in this case we are reading the video from a file
-vid_capture = cv2.VideoCapture(video_dir + f'{video_ref}.avi')
+vid_capture = cv2.VideoCapture(video_dir + f"{video_ref}.avi")
 
 if not vid_capture.isOpened():
     print("Error opening the video file")
@@ -32,11 +32,11 @@ if not vid_capture.isOpened():
 else:
     # Get frame rate information
     fps = vid_capture.get(cv2.CAP_PROP_FPS)
-    print('Frames per second : ', fps, 'FPS')
+    print("Frames per second : ", fps, "FPS")
 
     # Get frame count
     frame_count = vid_capture.get(cv2.CAP_PROP_FRAME_COUNT)
-    print('Frame count : ', frame_count)
+    print("Frame count : ", frame_count)
 
 frame_index = 0
 while vid_capture.isOpened():
@@ -50,7 +50,7 @@ while vid_capture.isOpened():
 
         # 20 milliseconds
         key = cv2.waitKey(20)
-        if key == ord('q'):
+        if key == ord("q"):
             break
 
     else:

@@ -49,7 +49,9 @@ ignored_classes = [2, 8, 9, 10]
 # For each category
 for cap_type in capture_type:
     # Go through all video files
-    for video_path in tqdm(glob(os.path.join(video_dir(cap_type), "*.avi")), desc=f"Processing {cap_type}"):
+    for video_path in tqdm(
+        glob(os.path.join(video_dir(cap_type), "*.avi")), desc=f"Processing {cap_type}"
+    ):
         video_name = Path(video_path).stem
 
         # Get annotations from the video
@@ -107,8 +109,8 @@ for cap_type in capture_type:
                         # Write object box coordinates in txt file
                         # The format is "class x_center y_center width height" normalized between 0 and 1
                         x, y, w, h = boxes[obj_idx]
-                        x, w = max(0, x/video_width), w/video_width
-                        y, h = max(0, y/video_height), h/video_height
+                        x, w = max(0, x / video_width), w / video_width
+                        y, h = max(0, y / video_height), h / video_height
                         labels_file.write(f"0 {x+w/2} {y+h/2} {w} {h}\n")
 
                 # Jump to next position in video
@@ -146,3 +148,6 @@ for img_path, txt_path in train_path_pairs:
 for img_path, txt_path in valid_path_pairs:
     img_path.rename(os.path.join(valid_images_dir, img_path.name))
     txt_path.rename(os.path.join(valid_labels_dir, txt_path.name))
+
+# WARNING: the enhancement/augmentation attempts with histogram correction and
+# sharpen edges filter, as tested in ../examples/enhance_video.py, did not yield better results

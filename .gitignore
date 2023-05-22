@@ -130,3 +130,9 @@ dmypy.json
 
 .idea/
 out/
+runs/
+**/*.pt
+**/*.mp4
+assignment_2/deep_sort
+assignment_2/results
+assignment_2/runs

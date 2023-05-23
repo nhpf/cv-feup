@@ -13,4 +13,12 @@ ultralytics.checks(verbose=True)
 detection_model = ultralytics.YOLO(model="yolov8n.pt", task="detect")
 
 # Train the model - transfer learning
-detection_model.train(data=yaml_file, epochs=20, imgsz=[1920, 1080], rect=True)
+detection_model.train(
+    data=yaml_file,
+    epochs=20,
+    imgsz=[1920, 1080],
+    rect=True,
+    # cache=True,
+    optimizer="Adam",
+    single_cls=True,
+)

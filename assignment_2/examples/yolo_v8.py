@@ -3,11 +3,12 @@ import cv2
 from scipy.io import loadmat
 from ultralytics import YOLO
 
-# Load medium model - later we will perform transfer learning
+# Load trained models
 yolo_detection = YOLO(model="yolov8m.pt")
-
-# Load trained model
 # yolo_detection = YOLO(model='/home/nick/repos/cv-feup/runs/detect/train5/weights/best.pt')
+yolo_classification = YOLO(
+    model="/home/nick/repos/cv-feup/assignment_2/classification_runs/train3/weights/last.pt"
+)
 
 # Hard-coded paths
 video_dir = "/externo/cv_data/VIS_Onshore/Videos/"

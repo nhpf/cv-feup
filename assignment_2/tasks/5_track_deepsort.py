@@ -1,9 +1,10 @@
 import cv2
+from numpy import argmax
 from datetime import datetime
 from ultralytics import YOLO
 from deep_sort_realtime.deepsort_tracker import DeepSort
 
-CONFIDENCE_THRESHOLD = 0.7
+APPLY_CLASSIFICATION = False
 
 # Create a video capture object, in this case we are reading the video from a file
 vid_capture = cv2.VideoCapture(
@@ -26,10 +27,16 @@ window_name = "Vessel tracking"
 cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
 
 # Load the pre-trained YOLO detection model
-# yolo_detection = YOLO("yolov8m.pt")
 yolo_detection = YOLO(
-    "/home/nick/repos/cv-feup/assignment_2/runs/detect/train8/weights/best.pt"
+    "/home/nick/repos/cv-feup/assignment_2/detection_runs/v2/train3/weights/best.pt"
 )
+DETECTION_CONFIDENCE_THRESHOLD = 0.7
+
+# Load the pre-trained YOLO classification model
+yolo_classification = YOLO(
+    "/home/nick/repos/cv-feup/assignment_2/classification_runs/train3/weights/last.pt"
+)
+CLASSIFICATION_CONFIDENCE_THRESHOLD = 0.5
 
 # Initialize the DeepSORT tracker
 deepsort_tracker = DeepSort(max_age=50)
@@ -54,7 +61,7 @@ while True:
         confidence = data[4]
 
         # Do not consider detections with confidence below the threshold
-        if float(confidence) < CONFIDENCE_THRESHOLD:
+        if float(confidence) < DETECTION_CONFIDENCE_THRESHOLD:
             continue
 
         # Get the box coordinates and the class id
@@ -64,11 +71,26 @@ while True:
             int(data[2]),
             int(data[3]),
         )
-        class_id = int(data[5])
+
+        if APPLY_CLASSIFICATION:
+            # Perform image classification with yolo
+            classified = yolo_classification(frame[y_min:y_max, x_min:x_max])[0]
+            vessel_classes = classified.names
+            probabilities = classified.probs.tolist()
+
+            # Do not consider vessels with confidence below the threshold
+            if max(probabilities) < CLASSIFICATION_CONFIDENCE_THRESHOLD:
+                continue
+
+            # Determine the predicted vessel class
+            vessel_class_id = argmax(probabilities)
+            vessel_class = vessel_classes[vessel_class_id]
+        else:
+            vessel_class_id = int(data[5])
 
         # Add the bounding box (x, y, w, h), confidence and class id to the detection_results list
         detection_results.append(
-            [(x_min, y_min, x_max - x_min, y_max - y_min), confidence, class_id]
+            [(x_min, y_min, x_max - x_min, y_max - y_min), confidence, vessel_class_id]
         )
 
     # Now call the next iteration of DeepSORT
@@ -114,7 +136,7 @@ while True:
     cv2.putText(frame, fps, (25, 25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 4)
 
     # Live preview of the resulting frame
-    cv2.imshow(window_name, frame)
+    # cv2.imshow(window_name, frame)
 
     # Write frame to mp4 file
     video_writer.write(frame)

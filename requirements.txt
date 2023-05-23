@@ -133,7 +133,7 @@ traitlets==5.9.0
 triton==2.0.0
 typing_extensions==4.5.0
 tzdata==2023.3
-ultralytics==8.0.105
+ultralytics==8.0.106
 uri-template==1.2.0
 urllib3==1.26.15
 wcwidth==0.2.6

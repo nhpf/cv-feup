@@ -11,7 +11,7 @@ Learn more about PyTorch configuration [here](https://pytorch.org/get-started/lo
 
 ## Context
 This project uses YOLOv8 and DeepSORT to perform "Multiple Vessel Detection and Tracking in Harsh Maritime Environments".
-It aims to recreate the results of a paper released this year by researches at INESC TEC.
+It aims to recreate the results of a paper released in early 2023 by researchers at INESC TEC.
 You can learn more about the project and our achievements by reading the final report as described below.
 
 ## File structure
@@ -27,7 +27,3 @@ You can learn more about the project and our achievements by reading the final r
 ### `tasks/`
  - Each script in this directory contains the isolated implementation of the major steps performed in the final Jupyter notebook
  - The order of execution is given by the number preceding each script, i.e. the first script is `1_process_singapore.py`
-
-### `main.py`
- - Entry point for the project before the notebook is ready
- - It has useful comments that will aid us during the project development
